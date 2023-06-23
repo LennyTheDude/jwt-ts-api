@@ -1,4 +1,7 @@
-export default {
+import * as dotenv from 'dotenv';
+dotenv.config();
+
+module.exports = {
     development: {
         username: process.env.DB_USER,
         password: process.env.DB_PASSWORD,

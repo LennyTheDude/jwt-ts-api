@@ -5,7 +5,7 @@ import cookieParser from 'cookie-parser';
 import * as dotenv from 'dotenv';
 import router from './routes/index';
 import errorMiddleware from './middlewares/error-middleware';
-import SequelizeConnection from './config/sequelizeconnection';
+import SequelizeConnection from './config/SequelizeConnection';
 
 dotenv.config();
 

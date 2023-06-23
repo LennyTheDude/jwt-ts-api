@@ -1,37 +1,39 @@
 'use strict';
 /** @type {import('sequelize-cli').Migration} */
+import { QueryInterface, DataTypes, QueryTypes } from 'sequelize';
+
 module.exports = {
-    async up(queryInterface, Sequelize) {
+    async up(queryInterface: QueryInterface) {
         await queryInterface.createTable('Users', {
             id: {
                 allowNull: false,
                 autoIncrement: true,
                 primaryKey: true,
-                type: Sequelize.INTEGER
+                type: DataTypes.INTEGER
             },
             isActivated: {
-                type: Sequelize.BOOLEAN
+                type: DataTypes.BOOLEAN
             },
             email: {
-                type: Sequelize.STRING
+                type: DataTypes.STRING
             },
             password: {
-                type: Sequelize.STRING
+                type: DataTypes.STRING
             },
             activationLink: {
-                type: Sequelize.STRING
+                type: DataTypes.STRING
             },
             createdAt: {
                 allowNull: false,
-                type: Sequelize.DATE
+                type: DataTypes.DATE
             },
             updatedAt: {
                 allowNull: false,
-                type: Sequelize.DATE
+                type: DataTypes.DATE
             }
         });
     },
-    async down(queryInterface, Sequelize) {
+    async down(queryInterface: QueryInterface) {
         await queryInterface.dropTable('Users');
     }
 };

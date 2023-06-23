@@ -1,4 +1,4 @@
-import SequelizeConnection from '../config/sequelizeconnection';
+import SequelizeConnection from '../config/SequelizeConnection';
 import TokenModel from './token';
 import UserModel from './user';
 

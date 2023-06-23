@@ -1,5 +1,5 @@
 import { Dialect, Options, Sequelize } from 'sequelize';
-import config from './SequelizeConfig';
+const config = require('./SequelizeConfig');
 const vars = config.development;
 
 class SequelizeConnection {
