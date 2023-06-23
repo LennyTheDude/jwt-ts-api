@@ -5,8 +5,8 @@ import cookieParser from 'cookie-parser';
 import * as dotenv from 'dotenv';
 import router from './routes/index';
 import errorMiddleware from './middlewares/error-middleware';
+import SequelizeConnection from './config/sequelizeconnection';
 
-const sequelize = require('./models/index').sequelize;
 dotenv.config();
 
 const PORT = process.env.PORT || 5000;
@@ -27,8 +27,7 @@ app.use(errorMiddleware);
 
 const start = async () => {
     try {
-        await sequelize.authenticate();
-        console.log('Database Connection successful.');
+        await SequelizeConnection.connect();
         app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
     } catch (e) {
         console.error('Unable to connect to the database:', e);

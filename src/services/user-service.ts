@@ -5,7 +5,8 @@ import mailService from './mail-service';
 import tokenService from './token-service';
 import UserDto from '../dtos/user-dto';
 import ApiError from '../exceptions/api-error';
-const User = require('../models').User;
+import Models from '../models/index';
+const User = Models.UserModel;
 
 class UserService {
     async signup(email: string, password: string) {

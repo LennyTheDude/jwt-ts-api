@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
-const tokenModel = require('../models').Token;
+import Models from '../models/index';
+const tokenModel = Models.TokenModel;
 
 class TokenService {
     generateTokens(payload: any) {
