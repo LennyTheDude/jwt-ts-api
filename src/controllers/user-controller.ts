@@ -2,13 +2,13 @@ import { Request, Response, NextFunction } from 'express';
 
 import userService from '../services/user-service';
 const { validationResult } = require('express-validator');
-const ApiError = require('../exceptions/api-error');
+const AuthError = require('../errors/auth-error');
 
 class UserController {
     async signup(req: Request, res: Response, next: NextFunction) {
         try {
             const errors = validationResult(req);
-            if (!errors.isEmpty()) return next(ApiError.BadRequest('Validation error', errors.array()));
+            if (!errors.isEmpty()) return next(AuthError.BadRequest('Validation error', errors.array()));
             const { email, password } = req.body;
             const userData = await userService.signup(email, password);
             res.cookie('refreshToken', userData.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true });

@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import ApiError from '../exceptions/api-error';
+import AuthError from '../errors/auth-error';
 import tokenService from '../services/token-service';
 
 interface IUserRequest extends Request {
@@ -10,22 +10,22 @@ export default function (req: IUserRequest, res: Response, next: NextFunction) {
     try {
         const authHeader = req.headers.authorization;
         if (!authHeader) {
-            return next(ApiError.UnauthorizedError());
+            return next(AuthError.UnauthorizedError());
         }
 
         const accessToken = authHeader.split(' ')[1];
         if (!accessToken) {
-            return next(ApiError.UnauthorizedError());
+            return next(AuthError.UnauthorizedError());
         }
 
         const userData = tokenService.validateAccessToken(accessToken);
         if (!userData) {
-            return next(ApiError.UnauthorizedError());
+            return next(AuthError.UnauthorizedError());
         }
 
         req.user = userData;
         next();
     } catch (e) {
-        next(ApiError.UnauthorizedError());
+        next(AuthError.UnauthorizedError());
     }
 }

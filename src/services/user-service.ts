@@ -4,7 +4,7 @@ import * as uuid from 'uuid';
 import mailService from './mail-service';
 import tokenService from './token-service';
 import UserDto from '../dtos/user-dto';
-import ApiError from '../exceptions/api-error';
+import AuthError from '../errors/auth-error';
 import Models from '../models/index';
 const User = Models.UserModel;
 
@@ -13,7 +13,7 @@ class UserService {
         const existingUser = await User.findOne({ where: { email } });
 
         if (existingUser) {
-            throw ApiError.BadRequest('User with this email address already exists.');
+            throw AuthError.BadRequest('User with this email address already exists.');
         }
         const hashPwd = await bcrypt.hash(password, 3);
         const activationLink = uuid.v4();
@@ -36,7 +36,7 @@ class UserService {
     async activate(activationLink: string) {
         const user = await User.findOne({ where: { activationLink } });
         if (!user) {
-            throw ApiError.BadRequest('Incorrect activation link');
+            throw AuthError.BadRequest('Incorrect activation link');
         }
 
         user.isActivated = true;
@@ -47,13 +47,13 @@ class UserService {
         const existingUser = await User.findOne({ where: { email } });
 
         if (!existingUser) {
-            throw ApiError.BadRequest('User not found');
+            throw AuthError.BadRequest('User not found');
         }
 
         const correctPwd = await bcrypt.compare(password, existingUser.password);
 
         if (!correctPwd) {
-            throw ApiError.BadRequest('Incorrect password');
+            throw AuthError.BadRequest('Incorrect password');
         }
 
         const userDto = new UserDto(existingUser);
@@ -75,13 +75,13 @@ class UserService {
 
     async refresh(refreshToken: string) {
         if (!refreshToken) {
-            throw ApiError.UnauthorizedError();
+            throw AuthError.UnauthorizedError();
         }
         const userData = tokenService.validateRefreshToken(refreshToken);
         const existingToken = await tokenService.findToken(refreshToken);
 
         if (!userData || !existingToken) {
-            throw ApiError.UnauthorizedError();
+            throw AuthError.UnauthorizedError();
         }
 
         const user = await User.findByPk(userData.id);
