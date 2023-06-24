@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import AuthError from '../errors/auth-error';
-import tokenService from '../services/token-service';
+import { tokenService } from '../services';
 
 interface IUserRequest extends Request {
     user: any;

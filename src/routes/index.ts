@@ -1,4 +1,4 @@
-import userController from '../controllers/user-controller';
+import { userController } from '../controllers';
 import { body } from 'express-validator';
 import authMiddleware from '../middlewares/auth-middleware';
 

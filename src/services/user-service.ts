@@ -1,8 +1,7 @@
 // const UserModel = require('../models/user-model');
 import bcrypt from 'bcrypt';
 import * as uuid from 'uuid';
-import mailService from './mail-service';
-import tokenService from './token-service';
+import { mailService, tokenService } from './index';
 import UserDto from '../dtos/user-dto';
 import AuthError from '../errors/auth-error';
 import Models from '../models/index';
@@ -103,4 +102,4 @@ class UserService {
     }
 }
 
-export default new UserService();
+export default UserService;

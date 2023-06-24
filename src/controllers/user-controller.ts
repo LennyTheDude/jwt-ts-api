@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 
-import userService from '../services/user-service';
+import { userService } from '../services';
 const { validationResult } = require('express-validator');
 const AuthError = require('../errors/auth-error');
 
@@ -71,4 +71,4 @@ class UserController {
     }
 }
 
-export default new UserController();
+export default UserController;
