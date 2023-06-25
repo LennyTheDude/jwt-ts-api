@@ -1,7 +1,6 @@
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import cookieParser from 'cookie-parser';
 import * as dotenv from 'dotenv';
 import router from './routes/index';
 import errorMiddleware from './middlewares/error-middleware';
@@ -15,7 +14,6 @@ const app = express();
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(cookieParser());
 app.use(
     cors({
         credentials: true,
