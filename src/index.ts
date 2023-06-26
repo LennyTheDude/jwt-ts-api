@@ -5,6 +5,7 @@ import * as dotenv from 'dotenv';
 import router from './routes/index';
 import errorMiddleware from './middlewares/error-middleware';
 import SequelizeConnection from './config/SequelizeConnection';
+import { Logging } from './config/Logging';
 
 dotenv.config();
 
@@ -22,13 +23,14 @@ app.use(
 );
 app.use('/api', router);
 app.use(errorMiddleware);
+Logging.configureLogger();
 
 const start = async () => {
     try {
         await SequelizeConnection.connect();
-        app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+        app.listen(PORT, () => Logging.info(process.env.NODE_ENV || 'development', `Server started on port ${PORT}`));
     } catch (e) {
-        console.error('Unable to connect to the database:', e);
+        Logging.error('Unable to connect to the database:', e);
     }
 };
 

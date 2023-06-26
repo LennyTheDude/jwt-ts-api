@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
-// const nodemailer = require('nodemailer');
 import * as dotenv from 'dotenv';
+import { Logging } from '../config/Logging';
 dotenv.config();
 
 class MailService {
@@ -10,7 +10,6 @@ class MailService {
         this.transporter = nodemailer.createTransport({
             host: process.env.SMTP_HOST,
             port: process.env.SMTP_PORT,
-            // service: 'gmail',
             secure: false,
             auth: {
                 user: process.env.SMTP_USER,
@@ -33,9 +32,9 @@ class MailService {
                     </div>
                 `
             });
-            console.log('Email sent to', to);
+            Logging.info(`Sending email to ${to}`, 'Email sent successfully.');
         } catch (error) {
-            console.error('Error sending email:', error);
+            Logging.error(`Sending email to ${to}`, error);
         }
     }
 }

@@ -1,4 +1,3 @@
-// const UserModel = require('../models/user-model');
 import bcrypt from 'bcrypt';
 import * as uuid from 'uuid';
 import { mailService, tokenService } from './index';
@@ -40,6 +39,7 @@ class UserService {
 
         user.isActivated = true;
         await user.save();
+        return user.email;
     }
 
     async login(email: string, password: string) {

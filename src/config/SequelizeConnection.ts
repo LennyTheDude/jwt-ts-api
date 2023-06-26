@@ -1,4 +1,5 @@
 import { Dialect, Options, Sequelize } from 'sequelize';
+import { Logging } from './Logging';
 const config = require('./SequelizeConfig');
 const vars = config.development;
 
@@ -13,6 +14,7 @@ class SequelizeConnection {
             dbConfig.username = vars.username;
             dbConfig.password = vars.password;
             dbConfig.dialect = vars.dialect as Dialect;
+            dbConfig.logging = vars.logging;
             SequelizeConnection.instance = new Sequelize(dbConfig);
         }
 
@@ -23,10 +25,10 @@ class SequelizeConnection {
         const sequelize = SequelizeConnection.getInstance();
         try {
             await sequelize.authenticate();
-            console.log('Database connection authenticated successfully');
+            Logging.info('Database', 'connection authenticated successfully');
             return sequelize;
         } catch (e: unknown) {
-            console.log('Error while creation connection to database : ' + e);
+            Logging.error('Error while creation connection to database : ', e);
             return sequelize;
         }
     }
@@ -35,10 +37,10 @@ class SequelizeConnection {
         const sequelize = SequelizeConnection.getInstance();
         try {
             await sequelize.close();
-            console.log('Database connection closed successfully');
+            Logging.info('Database', 'Connection closed successfully');
             return sequelize;
         } catch (e: unknown) {
-            console.log('Error while closing database connection : ' + e);
+            Logging.error('Error while closing database connection : ', e);
             return sequelize;
         }
     }
