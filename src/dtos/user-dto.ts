@@ -1,4 +1,4 @@
-import { IUserInfo } from "../interfaces/user";
+import { IUserInfo } from '../interfaces/user';
 
 export default class UserDto implements IUserInfo {
     email;

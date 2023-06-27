@@ -21,7 +21,8 @@ app.use(
         origin: process.env.CLIENT_URL
     })
 );
-app.use('/api', router);
+app.use('/api/users', router.UsersRouter);
+app.use('/api/auth', router.AuthRouter);
 app.use(errorMiddleware);
 Logging.configureLogger();
 
