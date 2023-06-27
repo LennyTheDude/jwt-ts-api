@@ -1,10 +1,8 @@
-import { Request, Response, NextFunction } from 'express';
+import { Response, NextFunction } from 'express';
 import AuthError from '../errors/auth-error';
 import { tokenService } from '../services';
-
-interface IUserRequest extends Request {
-    user: any;
-}
+import UserDto from '../dtos/user-dto';
+import { IUserRequest } from '../interfaces/user';
 
 export default function (req: IUserRequest, res: Response, next: NextFunction) {
     try {
@@ -23,7 +21,7 @@ export default function (req: IUserRequest, res: Response, next: NextFunction) {
             return next(AuthError.UnauthorizedError());
         }
 
-        req.user = userData;
+        req.user = new UserDto(userData);
         next();
     } catch (e) {
         next(AuthError.UnauthorizedError());

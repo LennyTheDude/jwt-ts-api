@@ -1,4 +1,6 @@
-export default class UserDto {
+import { IUserInfo } from "../interfaces/user";
+
+export default class UserDto implements IUserInfo {
     email;
     id;
     isActivated;
