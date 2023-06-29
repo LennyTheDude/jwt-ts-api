@@ -1,15 +1,15 @@
-const nodemailer = require('nodemailer');
+import * as nodemailer from 'nodemailer';
 import * as dotenv from 'dotenv';
 import { Logging } from '../config/Logging';
 dotenv.config();
 
 class MailService {
-    transporter: any;
+    transporter: nodemailer.Transporter;
 
     constructor() {
         this.transporter = nodemailer.createTransport({
-            host: process.env.SMTP_HOST,
-            port: process.env.SMTP_PORT,
+            host: process.env.SMTP_HOST ? process.env.SMTP_HOST : '',
+            port: process.env.SMTP_PORT ? Number(process.env.SMTP_PORT) : 587,
             secure: false,
             auth: {
                 user: process.env.SMTP_USER,

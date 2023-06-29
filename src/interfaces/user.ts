@@ -6,6 +6,6 @@ export interface IUserInfo {
     isActivated: boolean;
 }
 
-export interface IUserRequest extends Request {
-    user: IUserInfo;
-}
+export type IUserRequest = Request & {
+    user?: IUserInfo;
+};

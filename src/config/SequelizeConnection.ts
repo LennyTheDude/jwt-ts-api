@@ -1,5 +1,6 @@
 import { Dialect, Options, Sequelize } from 'sequelize';
 import { Logging } from './Logging';
+/* eslint-disable-next-line @typescript-eslint/no-var-requires */
 const config = require('./SequelizeConfig');
 const vars = config.development;
 

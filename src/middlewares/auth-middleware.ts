@@ -17,7 +17,7 @@ export default function (req: IUserRequest, res: Response, next: NextFunction) {
         }
 
         const userData = tokenService.validateAccessToken(accessToken);
-        if (!userData) {
+        if (!userData || typeof userData === 'string') {
             return next(AuthError.UnauthorizedError());
         }
 

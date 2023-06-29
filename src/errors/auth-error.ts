@@ -2,7 +2,7 @@ export default class AuthError extends Error {
     status;
     errors;
 
-    constructor(status: any, message: any, errors?: any) {
+    constructor(status: number, message: string | undefined, errors?: unknown) {
         super(message);
         this.status = status;
         this.errors = errors;
@@ -12,7 +12,7 @@ export default class AuthError extends Error {
         return new AuthError(401, 'Unauthorized user');
     }
 
-    static BadRequest(message: any, errors = []) {
+    static BadRequest(message: string, errors?: unknown) {
         return new AuthError(400, message, errors);
     }
 }

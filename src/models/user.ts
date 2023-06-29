@@ -1,4 +1,4 @@
-import { HasManyGetAssociationsMixin, Model, Sequelize, Association, DataTypes } from 'sequelize';
+import { Model, Sequelize, DataTypes } from 'sequelize';
 import { IUser as UserAttributes } from '../interfaces/sequelize';
 
 class UserModel extends Model implements UserAttributes {
@@ -11,7 +11,7 @@ class UserModel extends Model implements UserAttributes {
     public readonly createdAt!: Date;
     public readonly updatedAt!: Date;
 
-    public static associations: {};
+    // public static associations: {};
 
     static initModel(sequelize: Sequelize): void {
         UserModel.init(
@@ -42,7 +42,7 @@ class UserModel extends Model implements UserAttributes {
         );
     }
 
-    public static associateModel(): void {}
+    // public static associateModel(): void {}
 }
 
 export default UserModel;

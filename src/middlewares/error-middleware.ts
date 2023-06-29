@@ -1,8 +1,8 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response } from 'express';
 import AuthError from '../errors/auth-error';
 import { Logging } from '../config/Logging';
 
-export default function (err: any, req: Request, res: Response, next: NextFunction) {
+export default function (err: unknown, req: Request, res: Response) {
     Logging.error('Auth', err);
     if (err instanceof AuthError) {
         return res.status(err.status).json({ message: err.message, errors: err.errors });

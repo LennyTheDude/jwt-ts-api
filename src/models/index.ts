@@ -9,8 +9,8 @@ TokenModel.initModel(sequelize);
 UserModel.initModel(sequelize);
 
 // associate models
-TokenModel.associateModel();
-UserModel.associateModel();
+// TokenModel.associateModel();
+// UserModel.associateModel();
 
 export default {
     sequelize,

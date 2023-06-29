@@ -1,4 +1,4 @@
-import { HasManyGetAssociationsMixin, Model, Sequelize, Association, DataTypes } from 'sequelize';
+import { Model, Sequelize, DataTypes } from 'sequelize';
 import { IToken as TokenAttributes } from '../interfaces/sequelize';
 
 class TokenModel extends Model implements TokenAttributes {
@@ -8,7 +8,7 @@ class TokenModel extends Model implements TokenAttributes {
     public readonly createdAt!: Date;
     public readonly updatedAt!: Date;
 
-    public static associations: {};
+    // public static associations: {};
 
     static initModel(sequelize: Sequelize): void {
         TokenModel.init(
@@ -28,7 +28,7 @@ class TokenModel extends Model implements TokenAttributes {
         );
     }
 
-    public static associateModel(): void {}
+    // public static associateModel(): void {}
 }
 
 export default TokenModel;

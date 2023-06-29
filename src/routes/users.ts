@@ -1,8 +1,9 @@
 import { userController } from '../controllers';
 import authMiddleware from '../middlewares/auth-middleware';
+import express from 'express';
 
-const Router = require('express').Router;
-const UsersRouter = new Router();
+// import Router = require('express').Router;
+const UsersRouter: express.Router = express.Router();
 
 UsersRouter.get('/', authMiddleware, userController.getUsers);
 

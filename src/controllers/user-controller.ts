@@ -2,8 +2,8 @@ import { Request, Response, NextFunction } from 'express';
 
 import { userService } from '../services';
 import { Logging } from '../config/Logging';
-const { validationResult } = require('express-validator');
-const AuthError = require('../errors/auth-error');
+import { validationResult } from 'express-validator';
+import AuthError from '../errors/auth-error';
 
 class UserController {
     async signup(req: Request, res: Response, next: NextFunction) {

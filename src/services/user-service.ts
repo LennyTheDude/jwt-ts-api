@@ -79,7 +79,7 @@ class UserService {
         const userData = tokenService.validateRefreshToken(refreshToken);
         const existingToken = await tokenService.findToken(refreshToken);
 
-        if (!userData || !existingToken) {
+        if (!userData || !existingToken || typeof userData === 'string') {
             throw AuthError.UnauthorizedError();
         }
 

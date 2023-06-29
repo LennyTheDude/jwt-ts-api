@@ -8,9 +8,7 @@ export class Logging {
     private static logDirectory = path.join(process.cwd(), 'logs');
 
     private static CreateLogFolderIfNotExists() {
-        // eslint-disable-next-line security/detect-non-literal-fs-filename
         if (!fs.existsSync(this.logDirectory)) {
-            // eslint-disable-next-line security/detect-non-literal-fs-filename
             fs.mkdirSync(this.logDirectory);
         }
     }
@@ -39,7 +37,7 @@ export class Logging {
         this.SetLogger();
     }
 
-    private static GetValue(name: string, value: any) {
+    private static GetValue(name: string, value: unknown) {
         if (typeof value === 'string') {
             return `${name} - ${value}`;
         } else {
@@ -47,19 +45,19 @@ export class Logging {
         }
     }
 
-    public static debug(name: string, value: any) {
+    public static debug(name: string, value: unknown) {
         this.logger.log('debug', this.GetValue(name, value));
     }
 
-    public static error(name: string, value: any) {
+    public static error(name: string, value: unknown) {
         this.logger.log('error', this.GetValue(name, value));
     }
 
-    public static warn(name: string, value: any) {
+    public static warn(name: string, value: unknown) {
         this.logger.log('warn', this.GetValue(name, value));
     }
 
-    public static info(name: string, value: any) {
+    public static info(name: string, value: unknown) {
         this.logger.log('info', this.GetValue(name, value));
     }
 }
