@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/index.ts",
   "scripts": {
-    "build": "rm -rf build && prettier --write src && tsc",
+    "build": "rm -rf build && tsc",
     "dev": "nodemon src/index.ts",
     "lint": "npx eslint . --ext .ts",
     "migrate": "npx sequelize-cli db:migrate",
