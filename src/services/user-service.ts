@@ -17,7 +17,7 @@ class UserService {
         const activationLink = uuid.v4();
 
         const user = await User.create({ email, password: hashPwd, activationLink });
-        mailService.sendActivationMail(email, `${process.env.API_URL}/api/activate/${activationLink}`);
+        mailService.sendActivationMail(email, `${process.env.API_URL}/api/auth/activate/${activationLink}`);
 
         const userDto = new UserDto(user);
 
